@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "name": "now",
+  "builds": [
+      { "src": "*.go", "use": "@now/go" }
+  ],
+  "routes": [
+    { "src": "/", "dest": "main.go"}
+  ]
+}
