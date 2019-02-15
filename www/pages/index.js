@@ -2,11 +2,11 @@ import Time from "../components/time";
 import "isomorphic-unfetch";
 
 const langs = [
-  { name: "Go", path: "go", ext: ".go" },
-  { name: "Python", path: "python", ext: ".py" },
-  { name: "PHP", path: "php", ext: ".php" },
-  { name: "Node.js", path: "node", ext: ".js" },
-  { name: "Rust", path: "rust", ext: "" }
+  { name: "Go", path: "go" },
+  { name: "Python", path: "python" },
+  { name: "PHP", path: "php" },
+  { name: "Node.js", path: "node" },
+  { name: "Rust", path: "rust" }
 ];
 
 const Page = ({ nows }) => (
@@ -21,43 +21,11 @@ const Page = ({ nows }) => (
       </svg>
     </div>
     <div className="clocks">
-      {nows.map(({ name, path, ext, now }) => (
-        <a
-          href={`https://zeit.co/now-examples/monorepo/4csp3st7w/source?f=src/${path}/index${ext}`}
-          target="_blank"
-          title={name}
-          key={path}
-        >
+      {nows.map(({ name, path, now }) => (
+        <a href="#">
           <Time name={name} path={path} now={now} />
         </a>
       ))}
-    </div>
-    <div className="intro">
-      <hr />
-      <h2>What is this?</h2>
-      <p>
-        We built this deployment to showcase the power and flexibility of{" "}
-        <a href="https://zeit.co/blog/now-2" target="_blank">
-          Now 2.0
-        </a>
-        . It's organized as a monorepo that combines multiple technologies.
-      </p>
-      <p>
-        The entrypoint to this deployment is a Next.js application, compiled to
-        serverless functions that server-render on-demand.
-      </p>
-      <p>
-        Thanks to our{" "}
-        <a
-          href="https://zeit.co/docs/v2/deployments/builders/overview"
-          title="builders"
-          target="_blank"
-        >
-          builders
-        </a>
-        , you are not limited to just static or dynamic, Go or Node.js. The
-        possibilities are endless.
-      </p>
     </div>
     <style jsx global>{`
       * {
@@ -206,9 +174,9 @@ const Page = ({ nows }) => (
 Page.getInitialProps = async ({ req }) => {
   const baseUrl = `https://${req.headers.host}/api`;
   const nows = await Promise.all(
-    langs.map(async ({ name, path, ext }) => {
+    langs.map(async ({ name, path }) => {
       const now = await (await fetch(`${baseUrl}/${path}`)).text();
-      return { name, path, now, ext };
+      return { name, path, now };
     })
   );
 
