@@ -2,9 +2,16 @@
   "version": 2,
   "name": "now",
   "builds": [
-      { "src": "*.go", "use": "@now/go" }
+    { "src": "www/package.json", "use": "@now/next" },
+    { "src": "api/go/*.go", "use": "@now/go" },
+    { "src": "api/python/*.py", "use": "@now/python" },
+    { "src": "api/php/*.php", "use": "@now/php" },
+    { "src": "api/node/*.js", "use": "@now/node" },
+    { "src": "api/rust/Cargo.toml", "use": "@now/rust", "config": { "newPipeline": true } }
   ],
   "routes": [
-    { "src": "/", "dest": "main.go"}
+      { "src": "/api/rust", "dest": "/api/rust/time"},
+      { "src": "/api/(.*)", "dest": "/api/$1" },
+      { "src": "/(.*)", "dest": "/www/$1" }
   ]
 }
