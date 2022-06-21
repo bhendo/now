@@ -2,7 +2,7 @@
   "name": "now",
   "dependencies": {
     "isomorphic-unfetch": "3.0.0",
-    "next": "^8.0.0-canary.2",
+    "next": "^12.1.6",
     "react": "^16.7.0",
     "react-dom": "^16.7.0"
   },
